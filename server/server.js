@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
+const path = require('path');
 
 mongoose.connect(process.env.URLDB, (err, res) => {
     if (err) throw err;
@@ -20,6 +21,8 @@ app.use(bodyParser.json());
 app.use(require('./routes/index'));
 
 
+//habilitar la carpeta public
+app.use(express.static(path.resolve(__dirname, '../public')));
 
 
 app.listen(process.env.PORT, () => {
